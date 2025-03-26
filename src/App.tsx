@@ -1,31 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import Guitar from './components/Guitar';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import { useCart } from './hooks/useCart';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // TODO: clases de estilos cambiar de ingles a castellano
+  // TODO: variables cambiar de ingles a castellano
+  // TODO: imagenes modificar el alta para que sea dinamico
+
+  const {
+    data,
+    cart,
+    addToCart,
+    removeFromCart,
+    decreaseQuantity,
+    increaseQuantity,
+    clearCart,
+    isEmpty,
+    cartTotal,
+  } = useCart();
 
   return (
     <>
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header
+        cart={cart}
+        removeFromCart={removeFromCart}
+        decreaseQuantity={decreaseQuantity}
+        increaseQuantity={increaseQuantity}
+        clearCart={clearCart}
+        isEmpty={isEmpty}
+        cartTotal={cartTotal}
+      />
+      <main className="container-xl mt-5">
+        <h2 className="text-center">Nuestras Guitarras</h2>
+        <div className="row mt-5">
+          {data.map(guitar => (
+            <Guitar
+              key={`guitarId_${guitar.id}`}
+              guitar={guitar}
+              addToCart={addToCart}
+            />
+          ))}
+        </div>
+      </main>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
