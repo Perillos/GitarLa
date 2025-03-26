@@ -3,7 +3,7 @@ const Footer = () => {
 
   return (
     <footer className="text-center">
-      <a className="footer" href="fernandovr.com">
+      <a className="footer" href="https://fernandovr.com" target="__blanck">
         fernandovr.com
       </a>
       <p>© 2022 - {currentYear}. Todos los derechos reservados. </p>
